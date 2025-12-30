@@ -91,7 +91,7 @@ const Formpage=() =>{
       else if(bloodg.trim()===""){
          return alert(`You must need your blood group.`);
       }
-      else if(active==""){
+      else if(active===""){
          return alert(`You must neet to set it is active or not active`);
       }
       else edit? editHandler():createHandler();
