@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Search =() =>{
 
    const [isEnabled, setIsEnabled] = useState(false);
-   const[id,setId]=useState(null);
+   const[id,setId]=useState(undefined);
    const[profile,setProfile]=useState({id:'', name:'', pass:{deg:'', year:null},sex:'', guardian:{name:'', relation:''}, religion:'', bloodg:'',active:null});
    const[profiles,setProfiles]=useState([
          {id:12, name:'Moloy', pass:{deg:'BSc. in CSE', year:2025},sex:"male", guardian:{name:'Milon', relation:'Father'}, religion:'Hindu', bloodg:'O+',active:0}
@@ -29,7 +29,7 @@ const Search =() =>{
       
          useEffect(()=>{
             getAllProfiles();
-         },[]);
+         },[id]);
 
          const getId=(e)=>{
             setId(e.target.value);
@@ -38,34 +38,41 @@ const Search =() =>{
          const getProfile = (e) => {
             e.preventDefault();
             const profile = profiles.find(p => p.id === id);
-            if(profile==undefined){
+            if(profile===undefined){
                alert(`There is not any data with this id.`);
             }
             else{
+               setIsEnabled(true);
                setProfile(profile);
-               setId(null);
+               setId(undefined);
             }
           };
 
+          const clrSrc=()=>{
+            setId(undefined);
+            setProfile({id:'', name:'', pass:{deg:'', year:null},sex:'', guardian:{name:'', relation:''}, religion:'', bloodg:'',active:null});
+          }
+
 
    return(
-      <div>
+      <div className="srcp">
          <form onSubmit={getProfile}>
-            <input type="number" value={id} onChange={getId}/>
-            <button type="submit" onClick={() => setIsEnabled(true)}>Search</button>
+            <input className="search-box" placeholder="Give the person's App Id here" type="number" onChange={getId}/>
+            <button className="search-button" type="submit">Search</button>
+            <button type="reset" className="search-button" onClick={clrSrc}>Clear</button>
          </form>
-          <li>
-            <ul>Name: {profile.name}</ul>
-            <ul>Educational Passing Year: {profile.pass.year}</ul>
-            <ul>Degree:{profile.pass.deg}</ul>
-            <ul>Sex: {profile.sex}</ul>
-            <ul>Guardian Name: {profile.guardian.name}</ul>
-            <ul>Relation With Guardian: {profile.guardian.relation}</ul>
-            <ul>Religion: {profile.religion}</ul>
-            <ul>Blood Group: {profile.bloodg}</ul>
-            <ul> {profile.active=== "1"? "Active" : "Not Active"}</ul>
-            <ul><button onClick={()=> handleClick(profile)} disabled={!isEnabled}>Update</button></ul>
-          </li>
+          <p>
+            <ul><strong className="srcpf">Name:</strong> {profile.name}</ul>
+            <ul><strong className="srcpf">Educational Passing Year:</strong> {profile.pass.year}</ul>
+            <ul><strong className="srcpf">Degree:</strong> {profile.pass.deg}</ul>
+            <ul><strong className="srcpf">Sex:</strong> {profile.sex}</ul>
+            <ul><strong className="srcpf">Guardian Name:</strong> {profile.guardian.name}</ul>
+            <ul><strong className="srcpf">Relation With Guardian:</strong> {profile.guardian.relation}</ul>
+            <ul><strong className="srcpf">Religion:</strong> {profile.religion}</ul>
+            <ul><strong className="srcpf">Blood Group:</strong> {profile.bloodg}</ul>
+            <ul><strong className="srcpf"> {profile.active=== "1"? "Active" : "Not Active"}</strong></ul>
+            <ul><button className="search-button" onClick={()=> handleClick(profile)} disabled={!isEnabled}>Update</button></ul>
+          </p>
       </div>
    );
 };

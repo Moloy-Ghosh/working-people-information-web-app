@@ -1,23 +1,24 @@
 import {Outlet, Link} from "react-router-dom";
+import '../App.css';
 
 export default function Root(){
    return(
       <>
-      <div id="sidebar">
+      <div id="sidebar" className="mnpg">
          <h1>Active People Information App</h1>
          <nav>
             <ul>
-               <li>
-                  <Link to={'/'}>Form</Link>
+               <li className="mnpgli">
+                  <Link to={'/'} className="mnpglnk">Form</Link>
                </li>
-               <li>
-                  <Link to={'/search'}>Search</Link>
+               <li className="mnpgli">
+                  <Link to={'/search'} className="mnpglnk">Search</Link>
                </li>
-               <li>
-                  <Link to={'/app'}>Information</Link>
+               <li className="mnpgli">
+                  <Link to={'/app'} className="mnpglnk">Information</Link>
                </li>
-               <li>
-                  <Link to={'/about'}>About</Link>
+               <li className="mnpgli">
+                  <Link to={'/about'} className="mnpglnk">About</Link>
                </li>
             </ul>
          </nav>

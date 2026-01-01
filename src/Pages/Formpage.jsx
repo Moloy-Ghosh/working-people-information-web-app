@@ -7,9 +7,7 @@ const Formpage=() =>{
 
    const {state}= useLocation();
 
-   console.log(state);
-
-   const[profile,setProfile]=useState({id:'', name:'', pass:{deg:'', year:null}, sex:'', guardian:{name:'', relation:''}, religion:'', bloodg:'',active:null});
+   
    const[name,setName]=useState('');
    const[deg,setDeg]=useState('');
    const[year,setYear]=useState(null);
@@ -19,21 +17,8 @@ const Formpage=() =>{
    const[bloodg,setBloodg]=useState('');
    const[active,setActive]=useState('');
    const[sex,setSex]=useState('');
-   const[profiles,setProfiles]=useState([
-      {id:7, name:'Moloy', pass:{deg:'BSc. in CSE', year:2025},sex:"male", guardian:{name:'Milon', relation:'Father'}, religion:'Hindu', bloodg:'O+',active:0}
-   ]);
    const [edit, setEdit]=useState(false);
    const [editable,setEditable]=useState({}); 
-   
-      const getAllProfiles=()=>{
-         fetch(`http://localhost:4000/profiles`)
-         .then((res)=>res.json())
-         .then((data)=>setProfiles(data));
-      };
-   
-      useEffect(()=>{
-         getAllProfiles();
-      },[]);
 
 
 
@@ -98,8 +83,9 @@ const Formpage=() =>{
    }
 
    const createHandler=()=>{
+      const randomId=Date.now()+"";
       const newProfile={
-         id:Date.now()+"",
+         id:randomId,
          name:name,
          pass:{
             deg:deg,
@@ -121,10 +107,6 @@ const Formpage=() =>{
             "Content-type":"application/json",
          },
       }).then(()=>{
-         //refetch
-         getAllProfiles();
-      });
-      //setNotes([newNote,...notes]);
       setName(''); 
       setDeg(''); 
       setYear(null); 
@@ -134,6 +116,8 @@ const Formpage=() =>{
       setReligion(''); 
       setBloodg('');
       setActive(null);
+      });
+      alert(`Person's data is saved. App id is: `+randomId);
    }
 
    const editHandler=()=>{
@@ -161,7 +145,6 @@ const Formpage=() =>{
          },
       }).then(()=>{
          //refetch
-         getAllProfiles();
          setName(''); 
          setDeg(''); 
          setYear(null); 
@@ -198,61 +181,120 @@ const Formpage=() =>{
       setActive(profile.active);
     }
 
+    const clrHandler=()=>{
+      setName('');
+      setDeg(''); 
+      setSex('');
+      setYear(''); 
+      setNameg(''); 
+      setRel(''); 
+      setReligion(''); 
+      setBloodg('');
+      setActive('');
+    }
+
 
    return (
-      <div>
+      <div className="fftn">
+         <h2>Single person's information form:</h2>
          <form onSubmit={submitHandler}>
-            <input
-            type="text"
-            value={name}
-            onChange={changeNameHandler}
-            placeholder="Name"
-            />
-            <input
-            type="text"
-            value={deg}
-            onChange={changeDegHandler}
-            placeholder="Degree"
-            />
-            <input
-            type="text"
-            value={year}
-            onChange={changeYearHandler}
-            placeholder="Passing Year"
-            />
-            <input
-            type="text"
-            value={sex}
-            onChange={sexHandler}
-            placeholder="Sex"
-            />
-            <input
-            type="text"
-            value={nameg}
-            onChange={changeGNameHandler}
-            placeholder="Guardian Name"
-            />
-            <input
-            type="text"
-            value={rel}
-            onChange={changeRelationHandler}
-            placeholder="Relation between Guardian"
-            />
-            <input
-            type="text"
-            value={religion}
-            onChange={changeReligionHandler}
-            placeholder="Religion"
-            />
-            <input
-            type="text"
-            value={bloodg}
-            onChange={changeBloodgHandler}
-            placeholder="Blood Group"
-            />
-            <input type="radio" name="active" value="1" onChange={activeHandler}/>Active
-            <input type="radio" name="active" value="0" onChange={activeHandler}/>Not Active
-            <button type="submit">{edit?"Edit Person" : "Add Person"}</button>
+
+            <div>
+               <label for="name">Person's Name:</label> <br/>
+               <input
+               type="text"
+               name="name"
+               value={name}
+               onChange={changeNameHandler}
+               placeholder="Name"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="deg">Person's Degree:</label> <br/>
+               <input
+               type="text"
+               name="deg"
+               value={deg}
+               onChange={changeDegHandler}
+               placeholder="Degree"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="psyer">Passing Year:</label> <br/>
+               <input
+               type="text"
+               name="psyer"
+               value={year}
+               onChange={changeYearHandler}
+               placeholder="Year"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="sex">Sex:</label> <br/>
+               <input
+               type="text"
+               name="sex"
+               value={sex}
+               onChange={sexHandler}
+               placeholder="Sex"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="pgn">Person's Guardian Name:</label> <br/>
+               <input
+               type="text"
+               name="pgn"
+               value={nameg}
+               onChange={changeGNameHandler}
+               placeholder="Guardian Name"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="rel">Relation between Guardian:</label> <br/>
+               <input
+               type="text"
+               name="rel"
+               value={rel}
+               onChange={changeRelationHandler}
+               placeholder="Relation"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="rlign">Person's Religion:</label> <br/>
+               <input
+               type="text"
+               name="rlign"
+               value={religion}
+               onChange={changeReligionHandler}
+               placeholder="Religion"
+               /><br/><hr/>
+            </div>
+
+            <div>
+               <label for="bdg">Person's Blood Group:</label> <br/>
+               <input
+               type="text"
+               name="bdg"
+               value={bloodg}
+               onChange={changeBloodgHandler}
+               placeholder="Blood Group"
+               /><br/><hr/>
+            </div>
+
+            <span>
+               <label for="active">Select the Person is Active or Not Active:</label> <br/><br/>
+               <input type="radio" name="active" value="1" onChange={activeHandler}/>Active<br/>
+               <input type="radio" name="active" value="0" onChange={activeHandler}/>Not Active
+               <hr/>
+            </span>
+            <button className="baton" type="submit">{edit?"Edit Person" : "Add Person"}</button>
+            <button className="baton" type="reset" onClick={clrHandler}>Clear</button>
          </form>
       </div>
    );

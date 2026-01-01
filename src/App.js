@@ -47,14 +47,14 @@ function App() {
             <>
             <li key={singleProfile.id}>
                <p>App Id: {singleProfile.id}</p>
-               <p>Name: {singleProfile.name}</p>
+               <p>Name: <span className="nm">{singleProfile.name}</span></p>
                <p>Pass: Year: {singleProfile.pass.year} Degree:{singleProfile.pass.deg}</p>
                <p>Sex: {singleProfile.sex}</p>
                <p>Guardian: Name: {singleProfile.guardian.name} Relation: {singleProfile.guardian.relation}</p>
                <p>Blood-Group:{singleProfile.bloodg}</p>
                <p>{singleProfile.active==="1" ? "Active" : "Not Active"}</p>
-               <button onClick={()=> handleClick(singleProfile)}>Update</button>
-               <button onClick={()=> deleteHandler(singleProfile.id)}>Delete</button>
+               <button className="Appbtn" onClick={()=> handleClick(singleProfile)}>Update</button>
+               <button className="Appbtn" onClick={()=> deleteHandler(singleProfile.id)}>Delete</button>
                <hr/>
             </li>
             </>
