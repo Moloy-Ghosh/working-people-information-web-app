@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './App.css';
 
 function App() {
-   const[profiles,setProfiles]=useState([
-      {id:3, name:'Moloy', pass:{deg:'BSc. in CSE', year:2025},sex:'', guardian:{name:'Milon', relation:'Father'}, religion:'Hindu', bloodg:'O+',active:0}
-   ]);
+   const[profiles,setProfiles]=useState([]);
 
    const navigate = useNavigate();
 

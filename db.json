@@ -143,22 +143,6 @@
       "religion": "Muslim",
       "bloodg": "O-",
       "active": "1"
-    },
-    {
-      "id": "1767295342842",
-      "name": "Simana",
-      "pass": {
-        "deg": "BSc.",
-        "year": "2096"
-      },
-      "sex": "Female",
-      "guardian": {
-        "name": "Solaiman",
-        "relation": "Father"
-      },
-      "religion": "Muslim",
-      "bloodg": "B-",
-      "active": "1"
     }
   ]
 }
